@@ -125,7 +125,7 @@ async def _(bot: Bot, event: GroupMessageEvent, state: dict):
 
 # 删除任务
 @delete_task.handle()
-async def _(bot: Bot, event: GroupMessageEvent, state: dict):
+async def _(bot: Bot, event: MessageEvent, state: dict):
     if await CLASS_CADRE(bot, event, state):
         text = event.get_plaintext()
         task: DeleteTask = await DeleteTask(state["class_cadre"]["班级"], int(text) - 1 if text.isdigit() else None)
