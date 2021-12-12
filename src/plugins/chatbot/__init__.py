@@ -40,13 +40,14 @@ async def on_chat_handle(bot: Bot, event: MessageEvent, state: T_State):
 
 
 @on_chat.got("start")
-async def on_chat_got(bot: Bot, event: MessageEvent, state: T_State):
+async def on_chat_got(bot: Bot, event: MessageEvent):
     text = event.get_plaintext()
-    for txt in chat_ends:
-        if txt in text:
-            await on_chat.finish("拜拜！")
-    async with BotChat(text) as res:
-        if isinstance(event, GroupMessageEvent):
-            await on_chat.reject(await res.text())
-        await on_chat.finish(await res.text())
+    if text:
+        for txt in chat_ends:
+            if txt in text:
+                await on_chat.finish("拜拜！")
+        async with BotChat(text) as res:
+            if isinstance(event, GroupMessageEvent):
+                await on_chat.reject(await res.text())
+            await on_chat.finish(await res.text())
 
