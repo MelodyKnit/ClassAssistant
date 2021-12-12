@@ -7,20 +7,11 @@ from .config import Config
 encyclopedia = on_command("百科", aliases={"百科搜索"})
 echo = on_command("echo")
 get_covid = []
-poke = on_notice()
 
 
 @echo.handle()
 async def echo_handler(bot: Bot, event: MessageEvent):
     await echo.finish(event.message)
-
-
-@poke.handle()
-async def poke_handle(bot: Bot, event: PokeNotifyEvent, state: T_State):
-    if event.is_tome():
-        await poke.finish("不，不要戳我>_<!!")
-    else:
-        ...
 
 
 @encyclopedia.handle()
